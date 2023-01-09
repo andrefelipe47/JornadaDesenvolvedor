@@ -42,6 +42,11 @@ namespace Exercicio3
             }
 
             Console.WriteLine("O mais velho de todos: " + nomePessoaMaisVelha);
+
+            // Para quem tem curiosidade, isso se chama expressão lambda
+            // praticamente reduziu 11 linha de codigo a uma apenas
+            //var pessoaMaisVelha = pessoas.OrderByDescending(x => x.Idade).First();
+            //Console.WriteLine("O mais velho de todos: " + pessoaMaisVelha.Nome);
         }
     }
 }
