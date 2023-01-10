@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utilitarios;
 
 namespace Exercicio1
 {
@@ -32,7 +33,7 @@ namespace Exercicio1
                 var respostaUsuario = Console.ReadLine();
                 Console.Clear();
 
-                var seValorCorreto = Uteis.ValidarSeNumeroDecimalBrasileiro(respostaUsuario);
+                var seValorCorreto = Util.ValidarSeNumeroDecimalBrasileiro(respostaUsuario);
                 if (!seValorCorreto)
                 {
                     if (respostaUsuario?.Trim().ToUpper() == "PARE")

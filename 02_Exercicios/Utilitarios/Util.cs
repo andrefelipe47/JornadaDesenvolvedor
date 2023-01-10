@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Exercicio1
+﻿namespace Utilitarios
 {
-    public static class Uteis
+    public static class Util
     {
         public static bool ValidarSeNumeroDecimalBrasileiro(string? texto)
         {
