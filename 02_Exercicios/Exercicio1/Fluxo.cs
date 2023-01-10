@@ -32,7 +32,7 @@ namespace Exercicio1
                 var respostaUsuario = Console.ReadLine();
                 Console.Clear();
 
-                var seValorCorreto = ValidarSeNumeroDecimalBrasileiro(respostaUsuario);
+                var seValorCorreto = Uteis.ValidarSeNumeroDecimalBrasileiro(respostaUsuario);
                 if (!seValorCorreto)
                 {
                     if (respostaUsuario?.Trim().ToUpper() == "PARE")
@@ -56,26 +56,7 @@ namespace Exercicio1
 
             return notas;
         }
-        private bool ValidarSeNumeroDecimalBrasileiro(string? texto)
-        {
-            if (string.IsNullOrWhiteSpace(texto))
-                return false;
-
-            if (texto.Contains("."))
-                return false;
-
-            var isDecimal = decimal.TryParse(texto, out _);
-
-            // ! nega um booleano ou uma condicao que retorna bool
-            // colocar antes do isDecimal que bool
-            // faz com que o if espere false
-            // ou seja, como estou negando o isDecimal true se torna false
-            // seria a mesma coisa de if (isDecimal == false)
-            if (!isDecimal)
-                return false;
-
-            return true;
-        }
+        
         private void CalcularExibirMediaNotas(List<decimal> notas)
         {
             decimal somaNotas = 0;
@@ -94,6 +75,8 @@ namespace Exercicio1
             // ao invés de usar o if else
             // poderia usar um OPERADOR TERNARIO (também conhecido como if de uma linha)
             // Console.WriteLine("A média da turma foi: " + (somaNotas > 0 ? somaNotas / notas.Count : somaNotas));
+
+            Console.ReadKey();
         }
     }
 }
