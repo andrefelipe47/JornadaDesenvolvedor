@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComoLerArquivoTexto", "Como
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComoGravarArquivoTexto", "..\ComoGravarArquivoTexto\ComoGravarArquivoTexto.csproj", "{95C13419-37D4-436E-B7A8-AB0B9A98B40E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManipularArquivos", "..\ManipularArquivos\ManipularArquivos.csproj", "{4355BC16-6F23-4074-9C31-FA4DAC9A09BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{95C13419-37D4-436E-B7A8-AB0B9A98B40E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95C13419-37D4-436E-B7A8-AB0B9A98B40E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95C13419-37D4-436E-B7A8-AB0B9A98B40E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4355BC16-6F23-4074-9C31-FA4DAC9A09BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4355BC16-6F23-4074-9C31-FA4DAC9A09BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4355BC16-6F23-4074-9C31-FA4DAC9A09BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4355BC16-6F23-4074-9C31-FA4DAC9A09BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
