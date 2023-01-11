@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComoGravarArquivoTexto", ".
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManipularArquivos", "..\ManipularArquivos\ManipularArquivos.csproj", "{4355BC16-6F23-4074-9C31-FA4DAC9A09BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LerGravarCSV", "..\LerGravarCSV\LerGravarCSV.csproj", "{19ED1007-E4AB-45ED-874B-331E4B970670}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4355BC16-6F23-4074-9C31-FA4DAC9A09BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4355BC16-6F23-4074-9C31-FA4DAC9A09BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4355BC16-6F23-4074-9C31-FA4DAC9A09BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19ED1007-E4AB-45ED-874B-331E4B970670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19ED1007-E4AB-45ED-874B-331E4B970670}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19ED1007-E4AB-45ED-874B-331E4B970670}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19ED1007-E4AB-45ED-874B-331E4B970670}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
