@@ -26,5 +26,29 @@ namespace LerGravarCSV
 
             return null;
         }
+
+        public Entidades.Pessoa? ConsultarPorNomePrimeiroResultado(string nome)
+        {
+            var sr = new StreamReader(_caminhoArquivo);
+
+            while (true)
+            {
+                var linha = sr.ReadLine();
+
+                if (linha == null)
+                    break;
+
+                string[] colunas = linha.Split(';');
+
+                var pessoa = new Entidades.Pessoa();
+                pessoa.Nome = colunas[0];
+                pessoa.Observacao = colunas[1];
+
+                if (pessoa.Nome == nome)
+                    return pessoa;
+            }
+
+            return null;
+        }
     }
 }
