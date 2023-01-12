@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            new Servicos.ProdutoServico().Atualizar();
+            new Servicos.ProdutoServico().Perguntar();
         }
     }
 }

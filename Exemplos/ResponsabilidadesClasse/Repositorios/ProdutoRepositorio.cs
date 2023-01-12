@@ -19,11 +19,12 @@ namespace ResponsabilidadesClasse.Repositorios
                 file.Close();
             }
         }
+
         public void Inserir(Produto produto)
         {
             var identificador = ProximoIdentificador();
 
-            var sw = new StreamWriter(_caminhoBase);
+            var sw = new StreamWriter(_caminhoBase, true);
             sw.WriteLine(GerarLinhaProduto(identificador, produto));
             sw.Close();
         }
@@ -32,7 +33,6 @@ namespace ResponsabilidadesClasse.Repositorios
             CarregarProdutos();
             return ListagemProdutos;
         }
-
         public bool SeExiste(int identificadorProduto)
         {
             CarregarProdutos();
@@ -46,7 +46,6 @@ namespace ResponsabilidadesClasse.Repositorios
 
             //return false;
         }
-
         public void Atualizar(Produto produto)
         {
             CarregarProdutos();
@@ -55,12 +54,12 @@ namespace ResponsabilidadesClasse.Repositorios
             ListagemProdutos[posicao] = produto;
             RegravarProdutos(ListagemProdutos);
         }
-
         public void Remover(int identificadorProduto)
         {
+            CarregarProdutos();
             var posicao = ListagemProdutos.FindIndex(x => x.IdentificadorProduto == identificadorProduto);
-
-
+            ListagemProdutos.RemoveAt(posicao);
+            RegravarProdutos(ListagemProdutos);
         }
 
         #region Metodos privados

@@ -15,7 +15,41 @@ namespace ResponsabilidadesClasse.Servicos
             _repositorio = new Repositorios.ProdutoRepositorio();
         }
 
-        public void Cadastrar()
+        public void Perguntar()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("O que você deseja fazer?");
+                Console.WriteLine("1 - Listar Produtos");
+                Console.WriteLine("2 - Cadastrar Produtos");
+                Console.WriteLine("3 - Atualizar Produtos");
+                Console.WriteLine("4 - Remover Produtos");
+                var resposta = Console.ReadLine();
+                Console.Clear();
+
+                switch (resposta)
+                {
+                    case "1":
+                        Listar();
+                        break;
+                    case "2":
+                        Cadastrar();
+                        break;
+                    case "3":
+                        Atualizar();
+                        break;
+                    case "4":
+                        Remover();
+                        break;
+                    default:
+                        Console.WriteLine("Selecione uma opção válida");
+                        break;
+                }
+            }
+        }
+
+        private void Cadastrar()
         {
             var produto = ColetarDadosProduto();
             _repositorio.Inserir(produto);
@@ -24,8 +58,7 @@ namespace ResponsabilidadesClasse.Servicos
             Console.WriteLine($"Aperte uma tecla para prosseguir!");
             Console.ReadKey();
         }
-
-        public void Listar()
+        private void Listar()
         {
             var produtos = _repositorio.Listar();
 
@@ -40,10 +73,12 @@ namespace ResponsabilidadesClasse.Servicos
                 Console.WriteLine($"Identificador => {p.IdentificadorProduto};Nome => {p.Nome};Valor => {p.Valor};{(p.Situacao ? "Ativo" : "Inativo")}");
             }
 
+            Console.WriteLine("Para sair da listagem aperte uma tecla!");
+            Console.ReadKey();
+
             //produtos.ForEach(p => Console.WriteLine($"Identificador => {p.IdentificadorProduto};Nome => {p.Nome};Valor => {p.Valor};{(p.Situacao ? "Ativo" : "Inativo")}"));
         }
-
-        public void Atualizar()
+        private void Atualizar()
         {
             Console.WriteLine("Por favor forneça o identificador do produto para atualizar?");
             int identificadorInformado = Convert.ToInt32(Console.ReadLine());
@@ -57,6 +92,18 @@ namespace ResponsabilidadesClasse.Servicos
             produto.IdentificadorProduto = identificadorInformado;
 
             _repositorio.Atualizar(produto);
+        }
+        private void Remover()
+        {
+            Console.WriteLine("Por favor forneça o identificador do produto para remover?");
+            int identificadorInformado = Convert.ToInt32(Console.ReadLine());
+            if (!_repositorio.SeExiste(identificadorInformado))
+            {
+                Console.WriteLine("Este identificador não existe... Tente novamente...");
+                return;
+            }
+
+            _repositorio.Remover(identificadorInformado);
         }
 
         private Produto ColetarDadosProduto()
