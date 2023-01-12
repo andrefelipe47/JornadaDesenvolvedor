@@ -19,7 +19,51 @@ namespace ResponsabilidadesClasse.Repositorios
                 file.Close();
             }
         }
+        public void Inserir(Produto produto)
+        {
+            var identificador = ProximoIdentificador();
 
+            var sw = new StreamWriter(_caminhoBase);
+            sw.WriteLine(GerarLinhaProduto(identificador, produto));
+            sw.Close();
+        }
+        public List<Produto> Listar()
+        {
+            CarregarProdutos();
+            return ListagemProdutos;
+        }
+
+        public bool SeExiste(int identificadorProduto)
+        {
+            CarregarProdutos();
+            return ListagemProdutos.Any(x => x.IdentificadorProduto == identificadorProduto);
+
+            //foreach (var x in ListagemProdutos)
+            //{
+            //    if(x.IdentificadorProduto == identificadorProduto)
+            //        return true;
+            //}
+
+            //return false;
+        }
+
+        public void Atualizar(Produto produto)
+        {
+            CarregarProdutos();
+
+            var posicao = ListagemProdutos.FindIndex(x => x.IdentificadorProduto == produto.IdentificadorProduto);
+            ListagemProdutos[posicao] = produto;
+            RegravarProdutos(ListagemProdutos);
+        }
+
+        public void Remover(int identificadorProduto)
+        {
+            var posicao = ListagemProdutos.FindIndex(x => x.IdentificadorProduto == identificadorProduto);
+
+
+        }
+
+        #region Metodos privados
         private Produto LinhaTextoParaProduto(string linha)
         {
             var colunas = linha.Split(';');
@@ -32,7 +76,6 @@ namespace ResponsabilidadesClasse.Repositorios
 
             return produto;
         }
-
         private void CarregarProdutos()
         {
             ListagemProdutos.Clear();
@@ -49,20 +92,30 @@ namespace ResponsabilidadesClasse.Repositorios
 
             sr.Close();
         }
-
-        public int ProximoIdentificador()
+        private int ProximoIdentificador()
         {
             CarregarProdutos();
 
             if (ListagemProdutos.Count == 0)
                 return 1;
 
-            return ListagemProdutos.Max(x => x.IdentificadorProduto);
+            return ListagemProdutos.Max(x => x.IdentificadorProduto) + 1;
         }
-
-        public void Inserir()
+        private void RegravarProdutos(List<Produto> produtos)
         {
+            var sw = new StreamWriter(_caminhoBase);
 
+            foreach (var produto in produtos.OrderBy(x => x.IdentificadorProduto))
+            {
+                sw.WriteLine(GerarLinhaProduto(produto.IdentificadorProduto, produto));
+            }
+
+            sw.Close();
         }
+        private string GerarLinhaProduto(int identificador, Produto produto)
+        {
+            return $"{identificador};{produto.Nome};{produto.Valor};{produto.Situacao}";
+        }
+        #endregion
     }
 }

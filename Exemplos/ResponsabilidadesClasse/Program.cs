@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(new Repositorios.ProdutoRepositorio().ProximoIdentificador());
+            new Servicos.ProdutoServico().Atualizar();
         }
     }
 }
