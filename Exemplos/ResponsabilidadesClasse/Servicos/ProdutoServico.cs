@@ -22,9 +22,10 @@ namespace ResponsabilidadesClasse.Servicos
                 Console.Clear();
                 Console.WriteLine("O que você deseja fazer?");
                 Console.WriteLine("1 - Listar Produtos");
-                Console.WriteLine("2 - Cadastrar Produtos");
-                Console.WriteLine("3 - Atualizar Produtos");
-                Console.WriteLine("4 - Remover Produtos");
+                Console.WriteLine("2 - Cadastrar Produto");
+                Console.WriteLine("3 - Atualizar Produto");
+                Console.WriteLine("4 - Remover Produto");
+                Console.WriteLine("5 - Desativar Produto");
                 var resposta = Console.ReadLine();
                 Console.Clear();
 
@@ -42,6 +43,9 @@ namespace ResponsabilidadesClasse.Servicos
                     case "4":
                         Remover();
                         break;
+                    case "5":
+                        Desativar();
+                        break;
                     default:
                         Console.WriteLine("Selecione uma opção válida");
                         break;
@@ -52,6 +56,9 @@ namespace ResponsabilidadesClasse.Servicos
         private void Cadastrar()
         {
             var produto = ColetarDadosProduto();
+            if (produto is null)
+                return;
+
             _repositorio.Inserir(produto);
 
             Console.WriteLine($"{produto.Nome} cadastrado com sucesso!");
@@ -80,39 +87,54 @@ namespace ResponsabilidadesClasse.Servicos
         }
         private void Atualizar()
         {
-            Console.WriteLine("Por favor forneça o identificador do produto para atualizar?");
-            int identificadorInformado = Convert.ToInt32(Console.ReadLine());
-            if (!_repositorio.SeExiste(identificadorInformado))
-            {
-                Console.WriteLine("Este identificador não existe... Tente novamente...");
+            var identificador = PerguntarIdentificador("atualizar");
+            if (!identificador.HasValue)
                 return;
-            }
 
             var produto = ColetarDadosProduto();
-            produto.IdentificadorProduto = identificadorInformado;
+            if (produto is null)
+                return;
 
+            produto.IdentificadorProduto = identificador.Value;
             _repositorio.Atualizar(produto);
         }
         private void Remover()
         {
-            Console.WriteLine("Por favor forneça o identificador do produto para remover?");
-            int identificadorInformado = Convert.ToInt32(Console.ReadLine());
-            if (!_repositorio.SeExiste(identificadorInformado))
-            {
-                Console.WriteLine("Este identificador não existe... Tente novamente...");
+            var identificador = PerguntarIdentificador("remover");
+            if (!identificador.HasValue)
                 return;
-            }
-
-            _repositorio.Remover(identificadorInformado);
+            _repositorio.Remover(identificador.Value);
         }
-
-        private Produto ColetarDadosProduto()
+        private void Desativar()
+        {
+            var identificador = PerguntarIdentificador("desativar");
+            if (!identificador.HasValue)
+                return;
+            _repositorio.Desativar(identificador.Value);
+        }
+        private Produto? ColetarDadosProduto()
         {
             Console.WriteLine("Qual o nome do produto que você quer cadastrar?");
             var nomeProduto = Console.ReadLine();
 
+            if (!Utilitarios.Validacoes.ValidarTamanhoTexto(nomeProduto, 3, 80))
+            {
+                Console.WriteLine("O nome do produto deve conter de 3 a 80 caracteres.");
+                Console.ReadKey();
+                return null;
+            }
+
             Console.WriteLine($"Qual o valor do produto {nomeProduto}?");
-            var valor = Convert.ToDecimal(Console.ReadLine());
+            var valorString = Console.ReadLine();
+
+            if (!Utilitarios.Validacoes.ValidarSeNumeroDecimalBrasileiro(valorString))
+            {
+                Console.WriteLine("O valor deve ser informado no seguinte formato 0,00.");
+                Console.ReadKey();
+                return null;
+            }
+
+            var valor = Convert.ToDecimal(valorString);
 
             return new Produto()
             {
@@ -120,6 +142,33 @@ namespace ResponsabilidadesClasse.Servicos
                 Valor = valor,
                 Situacao = true
             };
+        }
+
+        private int? PerguntarIdentificador(string nomeAcao)
+        {
+
+            Console.WriteLine($"Por favor forneça o identificador do produto para {nomeAcao}?");
+            string identificadorInformadoString = Console.ReadLine();
+
+            if (!int.TryParse(identificadorInformadoString, out _))
+            {
+                Console.WriteLine("O identificador informado não e válido.");
+                Console.ReadKey();
+                return null;
+            }
+
+            var identificadorInformado = Convert.ToInt32(identificadorInformadoString);
+
+            if (!_repositorio.SeExiste(identificadorInformado))
+            {
+                Console.WriteLine("Este produto não existe... Tente novamente...");
+                Console.ReadKey();
+                return null;
+            }
+            else
+            {
+                return identificadorInformado;
+            }
         }
     }
 }
