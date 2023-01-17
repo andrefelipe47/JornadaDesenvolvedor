@@ -12,3 +12,8 @@ INSERT INTO Venda (ValorTotal, ValorDesconto, ValorPago, DataVenda, CpfCliente) 
 
 INSERT INTO ProdutoVenda (Quantidade, IdentificadorProduto, IdentificadorVenda) VALUES (2,1,1);
 INSERT INTO ProdutoVenda (Quantidade, IdentificadorProduto, IdentificadorVenda) VALUES (1,4,1);
+
+INSERT INTO Venda (ValorTotal, ValorDesconto, ValorPago, DataVenda, CpfCliente) VALUES (23.47, NULL, 23.47, CURRENT_TIMESTAMP, '00000000000');
+
+INSERT INTO ProdutoVenda (Quantidade, IdentificadorProduto, IdentificadorVenda) VALUES (2,1,2);
+INSERT INTO ProdutoVenda (Quantidade, IdentificadorProduto, IdentificadorVenda) VALUES (1,4,2);
