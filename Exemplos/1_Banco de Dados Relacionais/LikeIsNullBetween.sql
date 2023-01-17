@@ -1,0 +1,32 @@
+SELECT * FROM Produto
+WHERE Nome = 'Arroz'
+
+SELECT * FROM Produto
+WHERE Nome LIKE 'Arroz'
+
+SELECT * FROM Produto
+WHERE Nome LIKE 'Arroz%'
+
+SELECT * FROM Produto
+WHERE Nome LIKE '%5KG'
+
+SELECT * FROM Produto
+WHERE Nome LIKE '% 5KG'
+
+SELECT * FROM Venda
+WHERE ValorDesconto IS NULL
+
+SELECT * FROM Venda
+WHERE ValorDesconto IS NOT NULL
+
+SELECT * FROM Venda
+WHERE DataVenda 
+BETWEEN '2023-01-17 09:41'
+AND
+'2023-01-17 10:52'
+
+SELECT * FROM Produto
+WHERE Valor
+BETWEEN 3
+AND
+17
