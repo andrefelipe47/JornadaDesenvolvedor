@@ -20,7 +20,7 @@ namespace ImportacaoCsvClientes.Service
             LerCsv();
             _repositorio.AbrirConexao();
             GravarClientes();
-            ApagarClientes();
+            //ApagarClientes();
             _repositorio.FecharConexao();
         }
 
