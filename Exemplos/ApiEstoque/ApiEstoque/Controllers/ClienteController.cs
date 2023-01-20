@@ -1,4 +1,5 @@
-﻿using ApiEstoque.Domain.Models;
+﻿using ApiEstoque.Domain.Exceptions;
+using ApiEstoque.Domain.Models;
 using ApiEstoque.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,8 +30,19 @@ namespace ApiEstoque.Controllers
         [HttpPost("cliente")]
         public IActionResult Inserir([FromBody] Cliente model)
         {
-            _service.Inserir(model);
-            return StatusCode(201);
+            try
+            {
+                _service.Inserir(model);
+                return StatusCode(201);
+            }
+            catch (ValidacaoException ex)
+            {
+                return StatusCode(400, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.ToString());
+            }
         }
 
         [HttpDelete("cliente/{cpfCliente}")]
@@ -43,8 +55,19 @@ namespace ApiEstoque.Controllers
         [HttpPut("cliente")]
         public IActionResult Atualizar([FromBody] Cliente model)
         {
-            _service.Atualizar(model);
-            return StatusCode(201);
+            try
+            {
+                _service.Atualizar(model);
+                return StatusCode(201);
+            }
+            catch (ValidacaoException ex)
+            {
+                return StatusCode(400, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.ToString());
+            }
         }
     }
 }

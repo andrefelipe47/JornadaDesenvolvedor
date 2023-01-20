@@ -10,18 +10,15 @@ namespace ImportacaoCsvClientes.Service
     internal class ImportacaoService
     {
         private readonly List<Models.Cliente> _clientes = new List<Models.Cliente>();
-        private readonly Repositories.ClienteRepository _repositorio;
+        private readonly Gateway.ApiEstoqueGW _gwApiEstoque;
         public ImportacaoService()
         {
-            _repositorio = new Repositories.ClienteRepository();
+            _gwApiEstoque = new Gateway.ApiEstoqueGW();
         }
         public void ImportarClientes()
         {
             LerCsv();
-            _repositorio.AbrirConexao();
             GravarClientes();
-            //ApagarClientes();
-            _repositorio.FecharConexao();
         }
 
         private void LerCsv()
@@ -56,18 +53,9 @@ namespace ImportacaoCsvClientes.Service
         {
             foreach (var cliente in _clientes)
             {
-                if (_repositorio.SeExiste(cliente.CpfCliente))
-                    _repositorio.Atualizar(cliente);
-                else
-                    _repositorio.Inserir(cliente);
-            }
-        }
-        private void ApagarClientes()
-        {
-            var clientes = _repositorio.ListarClientes();
-            foreach (var cliente in clientes)
-            {
-                _repositorio.Deletar(cliente.CpfCliente);
+                var clienteBuscado = _gwApiEstoque.Buscar(cliente.CpfCliente);
+                if (clienteBuscado is null)
+                    _gwApiEstoque.Inserir(cliente);
             }
         }
     }
