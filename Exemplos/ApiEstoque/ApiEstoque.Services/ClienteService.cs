@@ -16,12 +16,24 @@ namespace ApiEstoque.Services
             _repositorio = new ClienteRepositorio();
         }
 
-        public List<Cliente> Listar()
+        public List<Cliente> Listar(string? nome)
         {
             try
             {
                 _repositorio.AbrirConexao();
-                return _repositorio.ListarClientes();
+                return _repositorio.ListarClientes(nome);
+            }
+            finally
+            {
+                _repositorio.FecharConexao();
+            }
+        }
+        public Cliente Obter(string cpfCliente)
+        {
+            try
+            {
+                _repositorio.AbrirConexao();
+                return _repositorio.Obter(cpfCliente);
             }
             finally
             {
