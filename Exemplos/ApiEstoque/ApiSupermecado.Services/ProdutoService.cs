@@ -94,6 +94,8 @@ namespace ApiSuperMercado.Services
 
             if (model.Valor <= 0)
                 throw new ValidacaoException("O valor do produto deve ser maior que zero.");
+
+            model.Nome = model.Nome.Trim();
         }
     }
 }

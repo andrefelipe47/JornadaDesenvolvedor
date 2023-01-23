@@ -35,6 +35,7 @@ namespace ApiSuperMercado.Services
             try
             {
                 _repositorio.AbrirConexao();
+                _repositorio.SeExiste(cpfCliente);
                 return _repositorio.Obter(cpfCliente);
             }
             finally
@@ -111,6 +112,9 @@ namespace ApiSuperMercado.Services
                 || model.Telefone.Trim().Length != RemoverMascaraTelefone(model.Telefone).Length)
                 )
                 throw new ValidacaoException("O mínimo que o telefone pode ter são 11 a 15 digitos, e não pode conter mascaras.");
+
+            model.Nome = model.Nome.Trim();
+            model.Telefone = model.Telefone?.Trim();
         }
 
         private static int ObterIdade(DateTime birthdate)
