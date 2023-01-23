@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ApiEstoque.Domain\ApiEstoque.Domain.csproj" />
-    <ProjectReference Include="..\ApiEstoque.Repositories\ApiEstoque.Repositories.csproj" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ApiSupermecado.Domain\ApiSupermecado.Domain.csproj" />
   </ItemGroup>
 
 </Project>

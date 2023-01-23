@@ -1,6 +1,6 @@
-﻿using ApiEstoque.Domain.Exceptions;
-using ApiEstoque.Domain.Models;
-using ApiEstoque.Repositories.Repositorio;
+﻿using ApiSuperMercado.Domain.Exceptions;
+using ApiSuperMercado.Domain.Models;
+using ApiSuperMercado.Repositories.Repositorio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace ApiEstoque.Services
+namespace ApiSuperMercado.Services
 {
     public class ClienteService
     {

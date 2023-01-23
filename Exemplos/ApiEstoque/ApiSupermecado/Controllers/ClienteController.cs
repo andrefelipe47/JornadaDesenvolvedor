@@ -1,10 +1,10 @@
-﻿using ApiEstoque.Domain.Exceptions;
-using ApiEstoque.Domain.Models;
-using ApiEstoque.Services;
+﻿using ApiSuperMercado.Domain.Exceptions;
+using ApiSuperMercado.Domain.Models;
+using ApiSuperMercado.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ApiEstoque.Controllers
+namespace ApiSuperMercado.Controllers
 {
     [ApiController]
     public class ClienteController : ControllerBase

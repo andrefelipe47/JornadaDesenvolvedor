@@ -1,4 +1,4 @@
-namespace ApiEstoque
+namespace ApiSuperMercado
 {
     public class Program
     {

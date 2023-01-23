@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiEstoque.Domain.Models
+namespace ApiSuperMercado.Domain.Models
 {
     public class Cliente
     {

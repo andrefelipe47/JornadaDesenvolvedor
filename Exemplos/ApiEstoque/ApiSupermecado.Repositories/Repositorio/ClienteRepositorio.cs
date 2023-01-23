@@ -1,12 +1,12 @@
-﻿using ApiEstoque.Domain.Models;
-using MySql.Data.MySqlClient;
+﻿using ApiSuperMercado.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiEstoque.Repositories.Repositorio
+namespace ApiSuperMercado.Repositories.Repositorio
 {
     public class ClienteRepositorio : Contexto
     {
@@ -17,7 +17,7 @@ namespace ApiEstoque.Repositories.Repositorio
                                         VALUES
                                     (@CpfCliente, @Nome, @Nascimento, @Telefone);";
 
-            using (var cmd = new MySqlCommand(comandoSql, _conn))
+            using (var cmd = new SqlCommand(comandoSql, _conn))
             {
                 cmd.Parameters.AddWithValue("@CpfCliente", model.CpfCliente);
                 cmd.Parameters.AddWithValue("@Nome", model.Nome);
@@ -35,7 +35,7 @@ namespace ApiEstoque.Repositories.Repositorio
                                     Telefone = @Telefone 
                                 WHERE CpfCliente = @CpfCliente;";
 
-            using (var cmd = new MySqlCommand(comandoSql, _conn))
+            using (var cmd = new SqlCommand(comandoSql, _conn))
             {
                 cmd.Parameters.AddWithValue("@CpfCliente", model.CpfCliente);
                 cmd.Parameters.AddWithValue("@Nome", model.Nome);
@@ -49,7 +49,7 @@ namespace ApiEstoque.Repositories.Repositorio
         {
             string comandoSql = @"SELECT COUNT(CpfCliente) as total FROM Cliente WHERE CpfCliente = @CpfCliente";
 
-            using (var cmd = new MySqlCommand(comandoSql, _conn))
+            using (var cmd = new SqlCommand(comandoSql, _conn))
             {
                 cmd.Parameters.AddWithValue("@CpfCliente", cpfCliente);
                 return Convert.ToBoolean(cmd.ExecuteScalar());
@@ -59,7 +59,7 @@ namespace ApiEstoque.Repositories.Repositorio
         {
             string comandoSql = @"SELECT CpfCliente, Nome, Nascimento, Telefone FROM Cliente WHERE CpfCliente = @CpfCliente";
 
-            using (var cmd = new MySqlCommand(comandoSql, _conn))
+            using (var cmd = new SqlCommand(comandoSql, _conn))
             {
                 cmd.Parameters.AddWithValue("@CpfCliente", cpfCliente);
 
@@ -86,7 +86,7 @@ namespace ApiEstoque.Repositories.Repositorio
             if (!string.IsNullOrWhiteSpace(nome))
                 comandoSql += " WHERE nome LIKE @nome";
 
-            using (var cmd = new MySqlCommand(comandoSql, _conn))
+            using (var cmd = new SqlCommand(comandoSql, _conn))
             {
                 if (!string.IsNullOrWhiteSpace(nome))
                     cmd.Parameters.AddWithValue("@nome", "%" + nome + "%");
@@ -112,7 +112,7 @@ namespace ApiEstoque.Repositories.Repositorio
             string comandoSql = @"DELETE FROM Cliente 
                                 WHERE CpfCliente = @CpfCliente;";
 
-            using (var cmd = new MySqlCommand(comandoSql, _conn))
+            using (var cmd = new SqlCommand(comandoSql, _conn))
             {
                 cmd.Parameters.AddWithValue("@CpfCliente", cpfCliente);
                 if (cmd.ExecuteNonQuery() == 0)

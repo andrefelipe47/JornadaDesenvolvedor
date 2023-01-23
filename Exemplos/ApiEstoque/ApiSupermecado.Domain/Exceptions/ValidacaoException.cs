@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiEstoque.Domain.Exceptions
+namespace ApiSuperMercado.Domain.Exceptions
 {
     public class ValidacaoException : Exception
     {
