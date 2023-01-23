@@ -22,7 +22,7 @@ namespace ApiSuperMercado.Controllers
         }
 
         [HttpGet("cliente/{cpfCliente}")]
-        public IActionResult Obter([FromRoute] string cpfCliente, [FromHeader] string acc)
+        public IActionResult Obter([FromRoute] string cpfCliente)
         {
             return StatusCode(200, _service.Obter(cpfCliente));
         }
