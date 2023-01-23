@@ -20,8 +20,8 @@ namespace ApiSuperMercado.Repositories.Repositorio
             using (var cmd = new SqlCommand(comandoSql, _conn))
             {
                 cmd.Parameters.AddWithValue("@Nome", model.Nome);
-                cmd.Parameters.AddWithValue("@Nascimento", model.Valor);
-                cmd.Parameters.AddWithValue("@Telefone", model.Situacao);
+                cmd.Parameters.AddWithValue("@Valor", model.Valor);
+                cmd.Parameters.AddWithValue("@Situacao", model.Situacao);
                 cmd.ExecuteNonQuery();
             }
         }
@@ -38,8 +38,8 @@ namespace ApiSuperMercado.Repositories.Repositorio
             {
                 cmd.Parameters.AddWithValue("@IdentificadorProduto", model.IdentificadorProduto);
                 cmd.Parameters.AddWithValue("@Nome", model.Nome);
-                cmd.Parameters.AddWithValue("@Nascimento", model.Valor);
-                cmd.Parameters.AddWithValue("@Telefone", model.Situacao);
+                cmd.Parameters.AddWithValue("@Valor", model.Valor);
+                cmd.Parameters.AddWithValue("@Situacao", model.Situacao);
                 if (cmd.ExecuteNonQuery() == 0)
                     throw new InvalidOperationException($"Nenhum registro afetado para o IdentificadorProduto {model.IdentificadorProduto}");
             }
