@@ -22,7 +22,7 @@ namespace ApiSuperMercado.Repositories.Repositorio
                 cmd.Parameters.AddWithValue("@CpfCliente", model.CpfCliente);
                 cmd.Parameters.AddWithValue("@Nome", model.Nome);
                 cmd.Parameters.AddWithValue("@Nascimento", model.Nascimento);
-                cmd.Parameters.AddWithValue("@Telefone", model.Telefone);
+                cmd.Parameters.AddWithValue("@Telefone", model.Telefone is null ? DBNull.Value : model.Telefone);
                 cmd.ExecuteNonQuery();
             }
         }
