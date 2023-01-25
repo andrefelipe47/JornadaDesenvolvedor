@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -33,18 +34,20 @@
         <div class="card mt-5">
             <div class="card-body">
                 <h5 class="card-title">Cadastro de Clientes</h5>
-                <form id="formCliente">
+                <form id="formCliente" data-parsley-validate="">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label class="form-label">Cpf</label>
-                                <input type="text" class="form-control cpf" id="inputCpf" required>
+                                <input type="text" class="form-control cpf" id="inputCpf" required
+                                data-parsley-length="[14,14]" data-parsley-length-message="O cpf informado não e válido.">
                             </div>
                         </div>
                         <div class="col-md-8">
                             <div class="mb-3">
                                 <label class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="inputNome" maxlength="255" required>
+                                <input type="text" class="form-control" id="inputNome" maxlength="255" required
+                                data-parsley-length="[3,255]" data-parsley-length-message="O nome deve conter no minimo 3 e máximo 255 caracteres.">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -56,7 +59,8 @@
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Telefone</label>
-                                <input type="text" class="form-control telefone" id="inputTelefone">
+                                <input type="text" class="form-control telefone" id="inputTelefone"
+                                data-parsley-length="[15,15]" data-parsley-length-message="O telefone e inválido.">
                             </div>
                         </div>
                     </div>
@@ -92,6 +96,8 @@
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="dist/parsleyjs/i18n.js"></script>
     <script src="uteis.js"></script>
     <script src="script.js"></script>
 </body>

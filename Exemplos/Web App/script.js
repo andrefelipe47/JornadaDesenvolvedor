@@ -82,5 +82,8 @@ function LimparFormulario() {
 }
 
 function SubmeterFormulario() {
-    EnviarFormularioParaApi();
+    var isValido = $('#formCliente').parsley().validate();
+    if(isValido) {
+        EnviarFormularioParaApi();
+    }
 }
