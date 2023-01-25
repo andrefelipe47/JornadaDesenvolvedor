@@ -2,8 +2,8 @@ $(document).ready(function () {
     ListarClientes();
 });
 
+var tabelaCliente;
 var urlBaseApi = "https://localhost:44349";
-
 
 function LimparCorpoTabelaClientes() {
     var componenteSelecionado = $('#tabelaCliente tbody');
@@ -33,40 +33,45 @@ function ConstruirTabela(linhas) {
     });
 
     $('#tabelaCliente tbody').html(htmlTabela);
-    $('#tabelaCliente').DataTable({
-        language: {
-            url: 'https://cdn.datatables.net/plug-ins/1.13.1/i18n/pt-BR.json'
-        }
-    });
-}
-
-function FormatarTelefone(texto) {
-    if (texto == null) {
-        return "";
-    } else {
-
-        var ddd = texto.slice(0, 2);
-        var primeiroNumero = texto.slice(2, 7);
-        var segundoNumero = texto.slice(7, 11);
-
-        return `(${ddd}) ${primeiroNumero}-${segundoNumero}`;
+    if (tabelaCliente == undefined) {
+        tabelaCliente = $('#tabelaCliente').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.13.1/i18n/pt-BR.json'
+            }
+        });
     }
 }
 
-function FormatarData(dataString) {
-    var dataTeste = new Date(dataString);
-    var ano = dataTeste.getFullYear();
-    var mes = String(dataTeste.getMonth() + 1).length == 1 ? '0' + String(dataTeste.getMonth() + 1) : String(dataTeste.getMonth() + 1);
-    var dia = String(dataTeste.getDate()).length == 1 ? '0' + String(dataTeste.getDate()) : String(dataTeste.getDate());
+function ObterValoresFormulario() {
+    var cpf = $("#inputCpf").val();
+    var nome = $("#inputNome").val();
+    var nascimento = $("#inputNascimento").val();
+    var telefone = $("#inputTelefone").val();
 
-    return dia + "/" + mes + "/" + ano;
+    var objeto = {
+        cpfCliente: cpf,
+        nome: nome,
+        nascimento: nascimento,
+        telefone: telefone == "" ? null : telefone
+    };
+
+    return objeto;
 }
 
-function FormatarCpf(cpfString) {
-    var p1 = cpfString.slice(0, 3);
-    var p2 = cpfString.slice(3, 6);
-    var p3 = cpfString.slice(6, 9);
-    var digitoVerificador = cpfString.slice(9, 11);
+function EnviarFormularioParaApi() {
+    var rotaApi = '/cliente';
 
-    return `${p1}.${p2}.${p3}-${digitoVerificador}`;
+    var objeto = ObterValoresFormulario();
+    var json = JSON.stringify(objeto);
+
+    $.ajax({
+        url: urlBaseApi + rotaApi,
+        method: 'POST',
+        data: json,
+        contentType: 'application/json'
+    }).done(function () {
+        ListarClientes();
+    }).fail(function (err, errr, errrr) {
+
+    });
 }
