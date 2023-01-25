@@ -33,36 +33,36 @@
         <div class="card mt-5">
             <div class="card-body">
                 <h5 class="card-title">Cadastro de Clientes</h5>
-                <form>
+                <form id="formCliente">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label class="form-label">Cpf</label>
-                                <input type="text" class="form-control" id="inputCpf">
+                                <input type="text" class="form-control cpf" id="inputCpf" required>
                             </div>
                         </div>
                         <div class="col-md-8">
                             <div class="mb-3">
                                 <label class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="inputNome">
+                                <input type="text" class="form-control" id="inputNome" maxlength="255" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Nascimento</label>
-                                <input type="text" class="form-control" id="inputNascimento">
+                                <input type="date" class="form-control" id="inputNascimento" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Telefone</label>
-                                <input type="text" class="form-control" id="inputTelefone">
+                                <input type="text" class="form-control telefone" id="inputTelefone">
                             </div>
                         </div>
                     </div>
                 </form>
-                <button type="button" class="btn btn-primary float-end ms-2">Cadastrar</button>
-                <button type="button" class="btn btn-danger float-end">Cancelar</button>
+                <button type="button" class="btn btn-primary float-end ms-2" onclick="SubmeterFormulario()">Cadastrar</button>
+                <button type="button" class="btn btn-danger float-end" onclick="LimparFormulario()">Cancelar</button>
             </div>
         </div>
         <div class="card mt-5">
@@ -90,7 +90,8 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>.
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="uteis.js"></script>
     <script src="script.js"></script>
 </body>

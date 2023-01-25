@@ -1,3 +1,8 @@
+$(document).ready(function () {
+    $('.cpf').mask('000.000.000-00', {reverse: true});
+    $('.telefone').mask('(00) 00000-0000');
+});
+
 function FormatarTelefone(texto) {
     if (texto == null) {
         return "";
@@ -27,4 +32,12 @@ function FormatarCpf(cpfString) {
     var digitoVerificador = cpfString.slice(9, 11);
 
     return `${p1}.${p2}.${p3}-${digitoVerificador}`;
+}
+
+function LimparMascaraCpf(cpfString){
+    return cpfString.replace(/\./g, "").replace(/\-/g, "");
+}
+
+function LimparMascaraTelefone(telefoneString){
+    return telefoneString.replace(/\(/g, "").replace(/\)/g, "").replace(/\ /g, "").replace(/\-/g, "");
 }

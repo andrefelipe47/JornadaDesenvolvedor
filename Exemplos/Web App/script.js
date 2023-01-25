@@ -49,10 +49,10 @@ function ObterValoresFormulario() {
     var telefone = $("#inputTelefone").val();
 
     var objeto = {
-        cpfCliente: cpf,
+        cpfCliente: LimparMascaraCpf(cpf),
         nome: nome,
         nascimento: nascimento,
-        telefone: telefone == "" ? null : telefone
+        telefone: telefone == "" ? null : LimparMascaraTelefone(telefone)
     };
 
     return objeto;
@@ -70,8 +70,17 @@ function EnviarFormularioParaApi() {
         data: json,
         contentType: 'application/json'
     }).done(function () {
+        LimparFormulario();
         ListarClientes();
     }).fail(function (err, errr, errrr) {
 
     });
+}
+
+function LimparFormulario() {
+    $('#formCliente').trigger("reset");
+}
+
+function SubmeterFormulario() {
+    EnviarFormularioParaApi();
 }
