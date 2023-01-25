@@ -1,6 +1,31 @@
 $(document).ready(function () {
-    $('.cpf').mask('000.000.000-00', {reverse: true});
+    $('.cpf').mask('000.000.000-00', { reverse: true });
     $('.telefone').mask('(00) 00000-0000');
+
+    $.ajaxSetup({
+        error: function (jqXHR, textStatus, errorThrown) {
+            if (jqXHR.status == 400) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: jqXHR.responseText
+                });
+            } else if (jqXHR.status == 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Os nossos servidores ou sua internet estão indisponíveis no momento, tente novamente mais tarde.'
+                });
+            } 
+            else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: jqXHR.responseText
+                });
+            }
+        }
+    });
 });
 
 function FormatarTelefone(texto) {
@@ -34,10 +59,10 @@ function FormatarCpf(cpfString) {
     return `${p1}.${p2}.${p3}-${digitoVerificador}`;
 }
 
-function LimparMascaraCpf(cpfString){
+function LimparMascaraCpf(cpfString) {
     return cpfString.replace(/\./g, "").replace(/\-/g, "");
 }
 
-function LimparMascaraTelefone(telefoneString){
+function LimparMascaraTelefone(telefoneString) {
     return telefoneString.replace(/\(/g, "").replace(/\)/g, "").replace(/\ /g, "").replace(/\-/g, "");
 }

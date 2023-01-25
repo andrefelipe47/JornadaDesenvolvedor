@@ -19,8 +19,6 @@ function ListarClientes() {
         dataType: "json"
     }).done(function (resultado) {
         ConstruirTabela(resultado);
-    }).fail(function (err, errr, errrr) {
-
     });
 }
 
@@ -72,8 +70,13 @@ function EnviarFormularioParaApi() {
     }).done(function () {
         LimparFormulario();
         ListarClientes();
-    }).fail(function (err, errr, errrr) {
-
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Cliente adicionado com sucesso.',
+            showConfirmButton: false,
+            timer: 1500
+        });
     });
 }
 
@@ -83,7 +86,7 @@ function LimparFormulario() {
 
 function SubmeterFormulario() {
     var isValido = $('#formCliente').parsley().validate();
-    if(isValido) {
+    if (isValido) {
         EnviarFormularioParaApi();
     }
 }
