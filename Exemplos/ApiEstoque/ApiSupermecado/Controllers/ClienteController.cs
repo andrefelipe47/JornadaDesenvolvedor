@@ -4,6 +4,7 @@ using ApiSupermecado.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace ApiSupermecado.Controllers
 {
@@ -20,6 +21,9 @@ namespace ApiSupermecado.Controllers
         [HttpGet("cliente")]
         public IActionResult Listar([FromQuery] string? nome)
         {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            var login = identity.FindFirst("login").Value;
+
             return StatusCode(200, _service.Listar(nome));
         }
 
