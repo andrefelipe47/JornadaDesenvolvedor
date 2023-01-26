@@ -1,4 +1,4 @@
-﻿using ApiSuperMercado.Domain.Models;
+﻿using ApiSupermecado.Domain.Models;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiSuperMercado.Repositories.Repositorio
+namespace ApiSupermecado.Repositories.Repositorio
 {
     public class ProdutoRepositorio : Contexto
     {

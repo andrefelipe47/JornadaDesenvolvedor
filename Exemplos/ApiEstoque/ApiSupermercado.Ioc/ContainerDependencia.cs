@@ -1,5 +1,5 @@
-﻿using ApiSuperMercado.Repositories.Repositorio;
-using ApiSuperMercado.Services;
+﻿using ApiSupermecado.Repositories.Repositorio;
+using ApiSupermecado.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ApiSupermercado.Ioc

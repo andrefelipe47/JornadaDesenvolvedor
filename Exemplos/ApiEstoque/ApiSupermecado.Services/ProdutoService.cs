@@ -1,6 +1,6 @@
-﻿using ApiSuperMercado.Domain.Exceptions;
-using ApiSuperMercado.Domain.Models;
-using ApiSuperMercado.Repositories.Repositorio;
+﻿using ApiSupermecado.Domain.Exceptions;
+using ApiSupermecado.Domain.Models;
+using ApiSupermecado.Repositories.Repositorio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace ApiSuperMercado.Services
+namespace ApiSupermecado.Services
 {
     public class ProdutoService
     {

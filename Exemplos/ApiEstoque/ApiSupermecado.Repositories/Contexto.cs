@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiSuperMercado.Repositories
+namespace ApiSupermecado.Repositories
 {
     public class Contexto
     {

@@ -1,11 +1,13 @@
-﻿using ApiSuperMercado.Domain.Exceptions;
-using ApiSuperMercado.Domain.Models;
-using ApiSuperMercado.Services;
+﻿using ApiSupermecado.Domain.Exceptions;
+using ApiSupermecado.Domain.Models;
+using ApiSupermecado.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ApiSuperMercado.Controllers
+namespace ApiSupermecado.Controllers
 {
+    [Authorize]
     [ApiController]
     public class ProdutoController : ControllerBase
     {

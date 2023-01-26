@@ -1,11 +1,13 @@
-﻿using ApiSuperMercado.Domain.Exceptions;
-using ApiSuperMercado.Domain.Models;
-using ApiSuperMercado.Services;
+﻿using ApiSupermecado.Domain.Exceptions;
+using ApiSupermecado.Domain.Models;
+using ApiSupermecado.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ApiSuperMercado.Controllers
+namespace ApiSupermecado.Controllers
 {
+    [Authorize]
     [ApiController]
     public class ClienteController : ControllerBase
     {
@@ -27,6 +29,7 @@ namespace ApiSuperMercado.Controllers
             return StatusCode(200, _service.Obter(cpfCliente));
         }
 
+        [Authorize(Roles = "1")]
         [HttpPost("cliente")]
         public IActionResult Inserir([FromBody] Cliente model)
         {
@@ -45,6 +48,7 @@ namespace ApiSuperMercado.Controllers
             }
         }
 
+        [Authorize(Roles = "1")]
         [HttpDelete("cliente/{cpfCliente}")]
         public IActionResult Deletar([FromRoute] string cpfCliente)
         {
@@ -52,6 +56,7 @@ namespace ApiSuperMercado.Controllers
             return StatusCode(200);
         }
 
+        [Authorize(Roles = "1")]
         [HttpPut("cliente")]
         public IActionResult Atualizar([FromBody] Cliente model)
         {

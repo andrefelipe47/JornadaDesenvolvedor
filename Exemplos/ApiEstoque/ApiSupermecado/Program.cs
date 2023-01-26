@@ -1,6 +1,9 @@
 using ApiSupermercado.Ioc;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
-namespace ApiSuperMercado
+namespace ApiSupermecado
 {
     public class Program
     {
@@ -22,6 +25,25 @@ namespace ApiSuperMercado
             builder.Services.AddSwaggerGen();
             ContainerDependencia.RegistrarServicos(builder.Services);
 
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(o =>
+            {
+                o.TokenValidationParameters = new TokenValidationParameters
+                {
+                    IssuerSigningKey = new SymmetricSecurityKey
+                    (Encoding.UTF8.GetBytes(builder.Configuration["SenhaJwt"])),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true
+                };
+            });
+            builder.Services.AddAuthorization();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -33,13 +55,9 @@ namespace ApiSuperMercado
 
             app.UseHttpsRedirection();
             app.UseCors();
+            app.UseAuthentication();
             app.UseAuthorization();
-
-
             app.MapControllers();
-
-   
-
             app.Run();
         }
     }

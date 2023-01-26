@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiSuperMercado.Domain.Models
+namespace ApiSupermecado.Domain.Models
 {
     public class Produto
     {
