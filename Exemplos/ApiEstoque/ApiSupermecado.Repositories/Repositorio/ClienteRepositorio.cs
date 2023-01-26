@@ -1,4 +1,5 @@
 ﻿using ApiSuperMercado.Domain.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -10,6 +11,10 @@ namespace ApiSuperMercado.Repositories.Repositorio
 {
     public class ClienteRepositorio : Contexto
     {
+        public ClienteRepositorio(IConfiguration configuration) : base(configuration)
+        {
+        }
+
         public void Inserir(Cliente model)
         {
             string comandoSql = @"INSERT INTO Cliente 

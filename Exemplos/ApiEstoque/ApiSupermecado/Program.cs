@@ -1,3 +1,5 @@
+using ApiSupermercado.Ioc;
+
 namespace ApiSuperMercado
 {
     public class Program
@@ -18,6 +20,7 @@ namespace ApiSuperMercado
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            ContainerDependencia.RegistrarServicos(builder.Services);
 
             var app = builder.Build();
 

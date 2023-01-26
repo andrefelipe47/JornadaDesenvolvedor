@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiSupermecado.Services", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiSupermecado", "ApiSupermecado\ApiSupermecado.csproj", "{C7A23187-3FD3-46DF-9D3D-4D425030FE31}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiSupermercado.Ioc", "ApiSupermercado.Ioc\ApiSupermercado.Ioc.csproj", "{DA00F4F8-B12D-4895-8A20-3EC277B81820}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C7A23187-3FD3-46DF-9D3D-4D425030FE31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7A23187-3FD3-46DF-9D3D-4D425030FE31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7A23187-3FD3-46DF-9D3D-4D425030FE31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA00F4F8-B12D-4895-8A20-3EC277B81820}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA00F4F8-B12D-4895-8A20-3EC277B81820}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA00F4F8-B12D-4895-8A20-3EC277B81820}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA00F4F8-B12D-4895-8A20-3EC277B81820}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

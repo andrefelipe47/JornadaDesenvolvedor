@@ -13,9 +13,9 @@ namespace ApiSuperMercado.Services
     public class ProdutoService
     {
         private readonly ProdutoRepositorio _repositorio;
-        public ProdutoService()
+        public ProdutoService(ProdutoRepositorio repositorio)
         {
-            _repositorio = new ProdutoRepositorio();
+            _repositorio = repositorio;
         }
 
         public List<Produto> Listar(string? nome)

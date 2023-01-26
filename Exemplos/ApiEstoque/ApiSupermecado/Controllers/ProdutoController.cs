@@ -10,9 +10,9 @@ namespace ApiSuperMercado.Controllers
     public class ProdutoController : ControllerBase
     {
         private readonly ProdutoService _service;
-        public ProdutoController()
+        public ProdutoController(ProdutoService service)
         {
-            _service = new ProdutoService();
+            _service = service;
         }
 
         [HttpGet("produto")]

@@ -13,9 +13,9 @@ namespace ApiSuperMercado.Services
     public class ClienteService
     {
         private readonly ClienteRepositorio _repositorio;
-        public ClienteService()
+        public ClienteService(ClienteRepositorio repositorio)
         {
-            _repositorio = new ClienteRepositorio();
+            _repositorio = repositorio;
         }
 
         public List<Cliente> Listar(string? nome)

@@ -10,9 +10,9 @@ namespace ApiSuperMercado.Controllers
     public class ClienteController : ControllerBase
     {
         private readonly ClienteService _service;
-        public ClienteController()
+        public ClienteController(ClienteService service)
         {
-            _service = new ClienteService();
+            _service = service;
         }
 
         [HttpGet("cliente")]
