@@ -11,10 +11,13 @@ namespace ApiSupermercado.Ioc
             //repositorios
             services.AddScoped<ClienteRepositorio, ClienteRepositorio>();
             services.AddScoped<ProdutoRepositorio, ProdutoRepositorio>();
+            services.AddScoped<UsuarioRepositorio, UsuarioRepositorio>();
 
             //services
             services.AddScoped<ClienteService, ClienteService>();
             services.AddScoped<ProdutoService, ProdutoService>();
+            services.AddScoped<UsuarioService, UsuarioService>();
+            services.AddScoped<AutorizacaoService, AutorizacaoService>();
         }
     }
 }

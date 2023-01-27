@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace ApiSupermecado.Domain.Models
 {
-    public enum EnumPermissaoUsuario
+    public enum EnumCargoUsuario
     {
-        Admin = 1,
-        User
+        Vendedor = 1,
+        Marketing
     }
     public class Usuario
     {
-        public string Login { get; set; }
+        public string Email { get; set; }
         public string Senha { get; set; }
+        public string Nome { get; set; }
+        public EnumCargoUsuario CargoUsuario { get; set; }
     }
 }

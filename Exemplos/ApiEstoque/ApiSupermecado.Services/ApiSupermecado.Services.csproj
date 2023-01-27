@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.10.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ApiSupermecado.Domain\ApiSupermecado.Domain.csproj" />
     <ProjectReference Include="..\ApiSupermecado.Repositories\ApiSupermecado.Repositories.csproj" />
   </ItemGroup>
