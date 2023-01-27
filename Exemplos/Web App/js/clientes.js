@@ -8,6 +8,7 @@ function exibirElementosVendedor() {
 
 $(document).ready(function () {
     ListarClientes();
+    $(".preloading").hide();
 });
 
 var tabelaCliente;
