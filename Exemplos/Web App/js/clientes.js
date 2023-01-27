@@ -1,3 +1,11 @@
+exibirElementosVendedor();
+function exibirElementosVendedor() {
+    if(nivelAcesso == '1'){
+        $("#cardCadastroCliente").show();
+    }
+}
+
+
 $(document).ready(function () {
     ListarClientes();
 });
