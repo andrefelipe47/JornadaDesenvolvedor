@@ -19,6 +19,15 @@ namespace ApiSupermecado.Controllers
         {
             _service = service;
         }
+
+        /// <summary>
+        /// Metodo para autenticar no sistema
+        /// Campos obrigatórios: email, senha
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Retorna um bearer token de 12 horas com nivel de acesso e nome do usuário</returns>
+        [ProducesResponseType(typeof(Token), 200)]
+        [ProducesResponseType(401)]
         [HttpPost("Autorizacao")]
         public IActionResult Login(Usuario model)
         {
