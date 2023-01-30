@@ -1,6 +1,6 @@
 exibirElementosVendedor();
 function exibirElementosVendedor() {
-    if(nivelAcesso == '1'){
+    if (nivelAcesso == '1') {
         $("#cardCadastroCliente").show();
     }
 }
@@ -36,14 +36,18 @@ function ConstruirTabela(linhas) {
     var htmlTabela = '';
 
     $(linhas).each(function (index, linha) {
-        htmlTabela = htmlTabela + `<tr><th>${FormatarCpf(linha.cpfCliente)}</th><td>${linha.nome}</td><td>${FormatarData(linha.nascimento)}</td><td>${FormatarTelefone(linha.telefone)}</td></tr>`;
+
+        var botaoAlterar = '<button class="btn btn-primary btn-sm me-2" onclick="Alterar(' + linha.cpfCliente + ')">Alterar</button>';
+        var botaoExcluir = '<button class="btn btn-danger btn-sm" onclick="Excluir(' + linha.cpfCliente + ')">Excluir</button>';
+
+        htmlTabela = htmlTabela + `<tr><th>${FormatarCpf(linha.cpfCliente)}</th><td>${linha.nome}</td><td>${FormatarData(linha.nascimento)}</td><td>${FormatarTelefone(linha.telefone)}</td><td>${botaoAlterar + botaoExcluir}</td></tr>`;
     });
 
     $('#tabelaCliente tbody').html(htmlTabela);
     if (tabelaCliente == undefined) {
         tabelaCliente = $('#tabelaCliente').DataTable({
             language: {
-                url: 'https://cdn.datatables.net/plug-ins/1.13.1/i18n/pt-BR.json'
+                url: 'dist/datatables/i18n.json'
             }
         });
     }
@@ -71,22 +75,43 @@ function EnviarFormularioParaApi() {
     var objeto = ObterValoresFormulario();
     var json = JSON.stringify(objeto);
 
-    $.ajax({
-        url: urlBaseApi + rotaApi,
-        method: 'POST',
-        data: json,
-        contentType: 'application/json'
-    }).done(function () {
-        LimparFormulario();
-        ListarClientes();
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Cliente adicionado com sucesso.',
-            showConfirmButton: false,
-            timer: 1500
+    var isEdicao = $("#inputCpf").is(":disabled");
+
+    if(isEdicao){
+        $.ajax({
+            url: urlBaseApi + rotaApi,
+            method: 'PUT',
+            data: json,
+            contentType: 'application/json'
+        }).done(function () {
+            VoltarEstadoInsercaoFormulario();
+            ListarClientes();
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Cliente alterado com sucesso.',
+                showConfirmButton: false,
+                timer: 1500
+            });
         });
-    });
+    } else {
+        $.ajax({
+            url: urlBaseApi + rotaApi,
+            method: 'POST',
+            data: json,
+            contentType: 'application/json'
+        }).done(function () {
+            LimparFormulario();
+            ListarClientes();
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Cliente adicionado com sucesso.',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        });
+    }
 }
 
 function LimparFormulario() {
@@ -98,4 +123,63 @@ function SubmeterFormulario() {
     if (isValido) {
         EnviarFormularioParaApi();
     }
+}
+
+function Excluir(cpfCliente) {
+    Swal.fire({
+        title: 'Você quer excluir esse cliente?',
+        showDenyButton: true,
+        confirmButtonText: 'Sim',
+        denyButtonText: `Não`,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            EnviarExclusao(cpfCliente);
+        } else if (result.isDenied) {
+            Swal.fire('Nada foi alterado.', '', 'info')
+        }
+    });
+}
+
+function EnviarExclusao(cpfCliente) {
+    var rotaApi = '/cliente/' + cpfCliente;
+
+    $.ajax({
+        url: urlBaseApi + rotaApi,
+        method: 'DELETE',
+    }).done(function () {
+        ListarClientes();
+        Swal.fire('Cliente excluido com sucesso.', '', 'success');
+    });
+}
+
+function Alterar(cpfCliente) {
+    var rotaApi = '/cliente/' + cpfCliente;
+
+    $.ajax({
+        url: urlBaseApi + rotaApi,
+        method: 'GET',
+        dataType: "json"
+    }).done(function (resultado) {
+        $("#inputCpf").val(FormatarCpf(resultado.cpfCliente));
+        $("#inputNome").val(resultado.nome);
+        $("#inputNascimento").val(FormatarDataAmericana(resultado.nascimento));
+        $("#inputTelefone").val(FormatarTelefone(resultado.telefone));
+
+        $("#inputCpf").prop( "disabled", true);
+    });
+}
+
+function BotaoCancelar(){
+    var isEdicao = $("#inputCpf").is(":disabled");
+
+    if(isEdicao){
+        VoltarEstadoInsercaoFormulario();
+    } else {
+        LimparFormulario();
+    }
+}
+
+function VoltarEstadoInsercaoFormulario(){
+    LimparFormulario();
+    $("#inputCpf").prop("disabled", false);
 }
