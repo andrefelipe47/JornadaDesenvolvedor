@@ -21,9 +21,6 @@ namespace ApiSupermecado.Controllers
         [HttpGet("cliente")]
         public IActionResult Listar([FromQuery] string? nome)
         {
-            var identity = HttpContext.User.Identity as ClaimsIdentity;
-            var login = identity.FindFirst("login").Value;
-
             return StatusCode(200, _service.Listar(nome));
         }
 

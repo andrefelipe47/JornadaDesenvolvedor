@@ -8,21 +8,43 @@ namespace Robozin
     {
         static void Main(string[] args)
         {
+
+            var urlBase = "";
             var client = new HttpClient();
-            var result = client.GetAsync("https://www.lojagrimorium.com.br/?view=ecom/itens&tcg=1").Result;
+            var result = client.GetAsync("").Result;
 
             Utf8EncodingProvider.Register();
-            var content = result.Content.ReadAsStringAsync().Result;
+            var html = result.Content.ReadAsStringAsync().Result;
 
-            var doc = new HtmlDocument();
-            doc.LoadHtml(content);
-            var cards = doc.DocumentNode.SelectNodes("//div[contains(@class, 'card-item')]").ToArray();
+            // peguei o html e obtive o total de produtos da pagina
+            // fingi que fiz calculo, pegando o total de produtos da pagina e fazendo um calculo.
+            var totalPagina = 286;
 
-            foreach (var card in cards)
+            var paginas = Enumerable.Range(1, totalPagina);
+
+            foreach (var pagina in paginas)
             {
-                var link = card.SelectSingleNode(".//a[@href]");
-                HtmlAttribute att = link.Attributes["href"];
-                var url = att.Value;
+                result = client.GetAsync("").Result;
+                html = result.Content.ReadAsStringAsync().Result;
+
+                var doc = new HtmlDocument();
+                doc.LoadHtml(html);
+
+                //selecionei os produtos pela classe css card-item
+                var produtos = doc.DocumentNode.SelectNodes("//div[contains(@class, 'card-item')]");
+
+                foreach (var produto in produtos)
+                {
+                    var elementoPreco = produto.SelectNodes(".//span[contains(@class, 'align-price')]");
+                    if (elementoPreco is null)
+                        continue;
+
+                    var preco = elementoPreco[0].InnerText.Replace("R$ ", "").Replace(",", ".");
+                    var elementoA = produto.Descendants("a").First();
+                    var linkProduto = elementoA.Attributes["href"].Value;
+                    var linkCompleto = urlBase + linkProduto.Replace("./", "/");
+                    var titulo = produto.SelectNodes(".//div[contains(@class, 'title')]").First().InnerText.Replace("\"", "");
+                }
             }
         }
     }
