@@ -4,6 +4,7 @@ using ApiSupermecado.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 
 namespace ApiSupermecado.Controllers
@@ -74,6 +75,50 @@ namespace ApiSupermecado.Controllers
             {
                 return StatusCode(500, ex.ToString());
             }
+        }
+
+        [Authorize]
+        [HttpGet("cliente/relatorio")]
+        public IActionResult Relatorio()
+        {
+            try
+            {
+                var clientes = _service.Listar(null);
+
+                string conteudoCsv = "Cpf;Nome;Nascimento;Telefone" + Environment.NewLine;
+
+                foreach (var cliente in clientes)
+                {
+                    conteudoCsv += string.Format("{0};{1};{2};{3};{4}"
+                        ,cliente.CpfCliente
+                        ,cliente.Nome
+                        ,cliente.Nascimento
+                        ,cliente.Telefone
+                        ,Environment.NewLine);
+                }
+
+                var stream = GenerateStreamFromString(conteudoCsv);
+
+                return File(stream, contentType: "text/csv", fileDownloadName: "relatorio.csv", enableRangeProcessing: true);
+            }
+            catch (ValidacaoException ex)
+            {
+                return StatusCode(400, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.ToString());
+            }
+        }
+
+        private static Stream GenerateStreamFromString(string s)
+        {
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(s);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
         }
     }
 }
