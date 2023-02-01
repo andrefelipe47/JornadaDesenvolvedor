@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Cadastro de cliente";
+}
+@section Scripts {
+        <script src="~/js/cliente/novo.js"></script>
+}
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">Cadastro de Cliente</h1>
+        <p class="mb-4">
+            Página de inclusão de cliente na CloudMarket
+        </p>
+
+    <div class="card mb-4 ocultarElemento" id="cardCadastroCliente">
+                <div class="card-body">
+                    <form id="formCliente" data-parsley-validate="">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="form-label">Cpf</label>
+                                    <input type="text" class="form-control cpf" id="inputCpf" required
+                                    data-parsley-length="[14,14]"
+                                    data-parsley-length-message="O cpf informado não e válido.">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="inputNome" maxlength="255" required
+                                    data-parsley-length="[3,255]"
+                                    data-parsley-length-message="O nome deve conter no minimo 3 e máximo 255 caracteres.">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Nascimento</label>
+                                    <input type="date" class="form-control" id="inputNascimento" required>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Telefone</label>
+                                    <input type="text" class="form-control telefone" id="inputTelefone"
+                                    data-parsley-length="[15,15]" data-parsley-length-message="O telefone e inválido.">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-primary float-right"
+                        onclick="SubmeterFormulario()">Cadastrar</button>
+                        <button type="button" class="btn btn-danger float-right mr-2"
+                        onclick="RedirecionarListagem()">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>

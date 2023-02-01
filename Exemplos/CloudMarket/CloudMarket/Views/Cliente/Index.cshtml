@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Gestão de Clientes";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/cliente/index.css" />
+}
+@section Scripts {
+    <script src="~/js/cliente/index.js"></script>
+}
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Gestão de Clientes</h1>
+    <p class="mb-4">
+        Página de gestão de clientes para a CloudMarket
+    </p>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary" style="display: contents;">Clientes</h6>
+            <button class="btn btn-primary btn-sm float-right" onclick="BaixarRelatorio()">Gerar relatório</button>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="tabelaCliente" class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Cpf</th>
+                            <th>Nome</th>
+                            <th>Nascimento</th>
+                            <th>Telefone</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Cpf</th>
+                            <th>Nome</th>
+                            <th>Nascimento</th>
+                            <th>Telefone</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
