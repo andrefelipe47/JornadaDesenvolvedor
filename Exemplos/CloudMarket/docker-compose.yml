@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  cloudmarket:
+    container_name: cloudmarket
+    image: cloudmarket
+    ports:
+      - 8001:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    restart: always

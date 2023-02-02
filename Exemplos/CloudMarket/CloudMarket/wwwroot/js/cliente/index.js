@@ -80,3 +80,7 @@ function BaixarRelatorio() {
             window.URL.revokeObjectURL(url);
         });
 }
+
+function RedirecionarNovoCliente() {
+    window.location.href = "/cliente/novo";
+}
