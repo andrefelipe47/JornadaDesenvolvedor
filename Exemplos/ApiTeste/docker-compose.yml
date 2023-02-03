@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  apiteste:
+    container_name: apiteste
+    image: apiteste
+    ports:
+      - 8002:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    restart: always
